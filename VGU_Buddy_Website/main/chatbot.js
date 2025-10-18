@@ -81,6 +81,8 @@ ${userData.message}
 
     if (!response.ok) throw new Error(data.error.message);
     const apiResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "I don't know.";
+    apiResponseText.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"); // bold markdown
+    apiResponseText.replace(/\*(.*?)\*/g, "<em>$1</em>"); // italics markdown
     messageElement.innerText = apiResponseText;
   } catch (error) {
     console.error(error);
